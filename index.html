@@ -6,33 +6,33 @@
 </head>
 <body>
 
-    <div id="v-dom"></div>
+<div id="v-dom"></div>
 
-    <script src="src/last-diff2.js"></script>
-    <script src="src/util.js"></script>
-    <script src="src/patch.js"></script>
-    <script src="src/diff.js"></script>
-    <script src="src/velement.js"></script>
-    <script>
-        var vdom = VElement("div", { "id": "container" }, [
-            VElement("h1", { style: "color:red" }, ["simple virtual dom"]),
-            VElement("p", ["hello world"]),
-            VElement("ul", [VElement("li", ["item #1"]), VElement("li", ["item #2"])])
-        ]);
+<script src="src/last-diff2.js"></script>
+<script src="src/util.js"></script>
+<script src="src/patch.js"></script>
+<script src="src/diff.js"></script>
+<script src="src/velement.js"></script>
+<script>
+    var vdom = VElement("div", {"id": "container"}, [
+        VElement("h1", {style: "color:red"}, ["simple virtual dom"]),
+        VElement("p", {}, ["hello world"]),
+        VElement("ul", {}, [VElement("li", {}, ["item #1"]), VElement("li", {}, ["item #2"])])
+    ]);
 
-        var rootnode = vdom.render();
+    var rootnode = vdom.render();
 
-        document.querySelector("#v-dom").appendChild(rootnode);
+    document.querySelector("#v-dom").appendChild(rootnode);
 
-        var newVdom = VElement("div", { "id": "container" }, [
-            VElement("h5", { style: "color:red" }, ["simple virtual dom"]),
-            VElement("p", ["hello world"]),
-            VElement("ul", [VElement("li", ["item #1"]), VElement("li", ["item #2"]), VElement("li", ["item #3"])])
-        ]);
+    var newVdom = VElement("div", {"id": "container"}, [
+        VElement("h5", {style: "color:red"}, ["simple virtual dom"]),
+        VElement("p", ["hello world"]),
+        VElement("ul", [VElement("li", ["item #1"]), VElement("li", ["item #2"]), VElement("li", ["item #3"])])
+    ]);
 
-//        var patches = diff(vdom, newVdom);
-//        console.log(JSON.stringify(patches));
-//        patch(rootnode,patches);
-    </script>
+            var patches = diff(vdom, newVdom);
+    //        console.log(JSON.stringify(patches));
+    //        patch(rootnode,patches);
+</script>
 </body>
 </html>

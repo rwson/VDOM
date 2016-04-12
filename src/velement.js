@@ -16,13 +16,13 @@
         }
 
         this.tagName = tagName;
-        this.props = props || {};
-        this.children = children || [];
+        this.props = props;
+        this.children = children;
 
         var _count = 0;
         var self = this;
 
-        if (this.children.length) {
+        if (this.children && this.children.length) {
             Util.each(this.children, function (item, index) {
                 if (item instanceof VElement) {
                     _count += item.count;
@@ -50,19 +50,17 @@
 
             //  赋值属性
             for (var i in this.props) {
-                Util.setAttr(el, i, this.props[i]);
+                if (this.props[i] && i) {
+                    Util.setAttr(el, i, this.props[i]);
+                }
             }
 
             //  子元素
-            if (!Util.isEmpty(this.children)) {
-                Util.each(this.children, function (item, index) {
-                    if (item instanceof VElement) {
-                        //  如果子元素为VElement,递归创建子元素,否则直接创建文本节点
-                        var childEl = (item instanceof VElement) ? item.render() : document.createTextNode(item);
-                        el.appendChild(childEl);
-                    }
-                });
-            }
+            Util.each(this.children, function (item, index) {
+                //  如果子元素为VElement,递归创建子元素,否则直接创建文本节点
+                var childEl = (item instanceof VElement) ? item.render() : document.createTextNode(item);
+                el.appendChild(childEl);
+            });
 
             return el;
         }

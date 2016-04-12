@@ -69,7 +69,7 @@
     }
 
     function _diffChildren(oldChildren, newChildren, index, patches, currentPatch) {
-        var diffs = listDiff(oldChildren, newChildren, "key");
+        var diffs = lastDiff.diff(oldChildren, newChildren, "key");
         newChildren = diffs.children;
         if (diffs.moves.length) {
             currentPatch.push({
